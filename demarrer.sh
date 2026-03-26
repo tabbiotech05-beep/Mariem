@@ -7,6 +7,13 @@ cd "$(dirname "$0")"
 # Arrêter toute instance existante sur ce port précis (5175)
 fuser -k 5175/tcp > /dev/null 2>&1
 
+# Vérifier si les dépendances sont installées
+if [ ! -d "node_modules" ]; then
+    echo "❌ Erreur : Le dossier 'node_modules' est introuvable."
+    echo "👉 Veuillez lancer 'npm install' avant de démarrer le serveur."
+    exit 1
+fi
+
 # Lancer Vite en arrière-plan avec le chemin direct
 nohup ./node_modules/.bin/vite > dev-server.log 2>&1 &
 
