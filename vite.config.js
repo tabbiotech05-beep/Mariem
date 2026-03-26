@@ -6,6 +6,6 @@ export default defineConfig({
     server: {
         port: 5175,
         strictPort: true,
-        allowedHosts: ["localhost", "127.0.0.1"],
+        allowedHosts: ["localhost", "127.0.0.1", ".trycloudflare.com"],
     },
 })
