@@ -7,8 +7,8 @@ cd "$(dirname "$0")"
 # Arrêter toute instance existante sur ce port précis (5175)
 fuser -k 5175/tcp > /dev/null 2>&1
 
-# Lancer Vite en arrière-plan
-nohup npm run dev > dev-server.log 2>&1 &
+# Lancer Vite en arrière-plan avec le chemin direct
+nohup ./node_modules/.bin/vite > dev-server.log 2>&1 &
 
 # Lancer le tunnel Cloudflared en arrière-plan
 nohup cloudflared tunnel --url http://localhost:5175 > cloudflared.log 2>&1 &
