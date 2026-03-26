@@ -7,9 +7,16 @@ cd "$(dirname "$0")"
 # Arrêter toute instance existante sur ce port précis (5175)
 fuser -k 5175/tcp > /dev/null 2>&1
 
-# Lancer en arrière-plan
+# Lancer Vite en arrière-plan
 nohup npm run dev > dev-server.log 2>&1 &
 
+# Lancer le tunnel Cloudflared en arrière-plan
+nohup cloudflared tunnel --url http://localhost:5175 > cloudflared.log 2>&1 &
+
 echo "✅ Le chatbot AMEN BANK est lancé sur http://localhost:5175"
+echo "⏳ Création du tunnel Cloudflare en cours..."
+sleep 5
+echo "🔗 Lien du tunnel (si disponible) :"
+grep -o "https://.*\.trycloudflare\.com" cloudflared.log | tail -n 1
 echo "👉 Utilisez ./log.sh pour voir les logs."
 echo "👉 Utilisez ./arreter.sh pour arrêter le serveur."
