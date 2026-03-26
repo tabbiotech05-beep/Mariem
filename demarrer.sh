@@ -4,8 +4,8 @@
 # Aller dans le dossier du projet
 cd "$(dirname "$0")"
 
-# Arrêter toute instance existante
-pkill -f vite > /dev/null 2>&1
+# Arrêter toute instance existante sur ce port précis (5175)
+fuser -k 5175/tcp > /dev/null 2>&1
 
 # Lancer en arrière-plan
 nohup npm run dev > dev-server.log 2>&1 &
